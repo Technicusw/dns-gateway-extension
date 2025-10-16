@@ -1,9 +1,7 @@
-// DNS Gateway - Using GitHub Registry
+// DNS Gateway - Fixed storage issue
 console.log('DNS Gateway: Loading with GitHub registry...');
 
-
 const REGISTRY_URL = 'https://raw.githubusercontent.com/Technicusw/dns-gateway-extension/main/registry/registry.json';
-
 let dnsRegistry = {};
 let lastRegistryUpdate = 0;
 
@@ -14,7 +12,7 @@ async function initialize() {
     console.log('DNS Gateway: Ready! TLDs:', Object.keys(dnsRegistry));
 }
 
-// Lade Registry von GitHub
+// Lade Registry von GitHub - OHNE chrome.storage
 async function loadRegistryFromGitHub() {
     try {
         console.log('DNS Gateway: Loading registry from GitHub...');
@@ -28,18 +26,19 @@ async function loadRegistryFromGitHub() {
         console.log('DNS Gateway: Registry loaded successfully');
         console.log('Available TLDs:', Object.keys(dnsRegistry));
         
-        // Speichere für Popup
-        chrome.storage.local.set({ 
-            dnsRegistry: dnsRegistry,
-            lastUpdate: lastRegistryUpdate 
-        });
+        // OPTIONAL: Versuche chrome.storage nur wenn verfügbar
+        if (typeof chrome !== 'undefined' && chrome.storage && chrome.storage.local) {
+            chrome.storage.local.set({ 
+                dnsRegistry: dnsRegistry,
+                lastUpdate: lastRegistryUpdate 
+            });
+        }
         
     } catch (error) {
         console.error('DNS Gateway: Failed to load registry:', error);
         // Fallback zu hardcoded Registry
         dnsRegistry = {
-            '.owndomain': '85.214.132.117:5353',
-            '.priv': '85.214.132.117:5353'
+            '.owndomain': '85.214.132.117:5353'
         };
     }
 }
@@ -78,10 +77,14 @@ async function handleRequest(details) {
             if (resolvedIP) {
                 console.log(`DNS Gateway: ${hostname} → ${resolvedIP}`);
                 return redirectToIP(details, hostname, resolvedIP);
+            } else {
+                console.log(`DNS Gateway: No IP found for ${hostname}`);
             }
         } catch (error) {
             console.error('DNS Gateway: Resolution failed:', error);
         }
+    } else {
+        console.log(`DNS Gateway: TLD ${tld} not in registry`);
     }
     
     return { requestHeaders: details.requestHeaders };
@@ -99,11 +102,15 @@ function getTLD(hostname) {
 // DNS-Abfrage an privaten DNS-Server
 async function dnsLookup(hostname, dnsServer) {
     try {
+        console.log(`DNS Gateway: Querying ${dnsServer} for ${hostname}`);
         const response = await fetch(`http://${dnsServer}/dns-query?name=${encodeURIComponent(hostname)}`);
         
-        if (!response.ok) throw new Error('DNS server response not ok');
+        if (!response.ok) {
+            throw new Error(`DNS server response: ${response.status}`);
+        }
         
         const data = await response.json();
+        console.log('DNS Gateway: DNS response:', data);
         
         if (data.Answer && data.Answer.length > 0) {
             return data.Answer[0].data;
@@ -146,8 +153,10 @@ function redirectToIP(details, originalHostname, targetIP) {
     };
 }
 
-// Initialisierung
-initialize();
+// Initialisierung mit Verzögerung für chrome.storage
+setTimeout(() => {
+    initialize();
+}, 100);
 
 // Registry manuell aktualisieren
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
