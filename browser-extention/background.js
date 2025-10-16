@@ -1,7 +1,11 @@
 // DNS Gateway - Using GitHub Registry
 console.log('DNS Gateway: Loading with GitHub registry...');
 
+<<<<<<< HEAD
 const REGISTRY_URL = 'https://raw.githubusercontent.com/Technicusw/dns-gateway-extension/main/registry/registry.json';
+=======
+const REGISTRY_URL = 'https://raw.githubusercontent.com/technicusw/dns-gateway-registry/registry/registry.json';
+>>>>>>> 9cfb6a121611595ffa91bc50aee304adf80877cf
 let dnsRegistry = {};
 let lastRegistryUpdate = 0;
 

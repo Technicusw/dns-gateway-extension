@@ -17,9 +17,7 @@ class DNSServer {
         } catch (error) {
             console.log('No records.json found, using default records');
             return {
-                'test.owndomain': '93.184.216.34',
-                'api.owndomain': '142.251.36.206',
-                '*.owndomain': '93.184.216.34'
+                'test.owndomain': '193.124.77.154:5454'
             };
         }
     }
