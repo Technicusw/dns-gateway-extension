@@ -1,0 +1,14 @@
+{
+  "example.priv": {
+    "dns_server": "93.184.216.34",
+    "description": "Example private domain",
+    "maintainer": "community",
+    "last_updated": "2024-01-15T10:00:00Z"
+  },
+  "*.user.priv": {
+    "dns_server": "85.214.132.117",
+    "description": "Wildcard domain for user services",
+    "maintainer": "user-network",
+    "last_updated": "2024-01-15T10:00:00Z"
+  }
+}
