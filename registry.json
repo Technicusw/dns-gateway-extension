@@ -1,14 +1,16 @@
 {
-  "example.priv": {
+  "test.dnsgateway.priv": {
     "dns_server": "93.184.216.34",
-    "description": "Example private domain",
-    "maintainer": "community",
-    "last_updated": "2024-01-15T10:00:00Z"
+    "description": "Test domain pointing to example.com",
+    "maintainer": "dns-gateway-test",
+    "last_updated": "2024-01-15T10:00:00Z",
+    "verified": true,
+    "type": "test"
   },
-  "*.user.priv": {
-    "dns_server": "85.214.132.117",
-    "description": "Wildcard domain for user services",
-    "maintainer": "user-network",
+  "*.test.dnsgateway.priv": {
+    "dns_server": "93.184.216.34", 
+    "description": "Wildcard test domain",
+    "maintainer": "dns-gateway-test",
     "last_updated": "2024-01-15T10:00:00Z"
   }
 }
