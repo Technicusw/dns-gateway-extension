@@ -1,0 +1,8 @@
+{
+  "test.owndomain": "93.184.216.34",
+  "api.owndomain": "142.251.36.206",
+  "web.owndomain": "13.33.243.105",
+  "*.owndomain": "93.184.216.34",
+  "mein-blog.priv": "192.168.1.100",
+  "localhost.home": "127.0.0.1"
+}

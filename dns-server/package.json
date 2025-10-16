@@ -1,0 +1,16 @@
+{
+  "name": "dns-gateway-server",
+  "version": "1.0.0",
+  "description": "OpenSource DNS Server for custom TLDs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": ["dns", "gateway", "opensource"],
+  "author": "DNS Gateway Community",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
