@@ -13,14 +13,16 @@
   
   "host_permissions": [
     "http://*/*",
-    "https://*/*"
+    "https://*/*",
+    "https://raw.githubusercontent.com/dns-gateway/registry/main/*"
   ],
   
   "background": {
-    "service_worker": "background.js"
+    "scripts": ["background.js"],
+    "type": "module"
   },
   
-  "action": {
+  "browser_action": {
     "default_popup": "popup/popup.html",
     "default_title": "DNS Gateway"
   },
@@ -29,5 +31,12 @@
     "16": "assets/icons/icon-16.png",
     "48": "assets/icons/icon-48.png",
     "128": "assets/icons/icon-128.png"
+  },
+  
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "dns-gateway@yourdomain.com",
+      "strict_min_version": "109.0"
+    }
   }
 }
