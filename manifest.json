@@ -1,32 +1,23 @@
 {
-  "manifest_version": 3,
-  "name": "DNS Gateway",
+  "manifest_version": 2,
+  "name": "DNS Gateway TEST",
   "version": "1.0.0",
-  "description": "Decentralized DNS resolution for custom domains",
+  "description": "Test DNS Gateway functionality",
   
   "permissions": [
     "webRequest",
     "webRequestBlocking",
-    "storage"
-  ],
-  
-  "host_permissions": [
+    "storage",
     "http://*/*",
     "https://*/*"
   ],
   
   "background": {
-    "service_worker": "background.js"
+    "scripts": ["background.js"],
+    "persistent": true
   },
   
-  "action": {
-    "default_popup": "popup/popup.html",
-    "default_title": "DNS Gateway"
-  },
-  
-  "icons": {
-    "16": "assets/icons/icon-16.png",
-    "48": "assets/icons/icon-48.png",
-    "128": "assets/icons/icon-128.png"
+  "browser_action": {
+    "default_popup": "popup/popup.html"
   }
 }
