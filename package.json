@@ -1,0 +1,18 @@
+{
+  "name": "dns-gateway-extension",
+  "version": "1.0.0",
+  "description": "Decentralized DNS Network",
+  "type": "module",
+  "scripts": {
+    "start:authoritative": "node dns-server/authoritative/server.js",
+    "start:recursive": "node dns-server/recursive/server.js",
+    "dev:authoritative": "nodemon dns-server/authoritative/server.js",
+    "dev:recursive": "nodemon dns-server/recursive/server.js"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
