@@ -17,7 +17,7 @@ class DNSServer {
         } catch (error) {
             console.log('No records.json found, using default records');
             return {
-                'test.owndomain': '193.124.77.154:5454'
+                'test.owndomain': '192.168.1.34'
             };
         }
     }
